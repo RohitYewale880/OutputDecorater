@@ -1,4 +1,5 @@
-<h2>ADD TODO</h2>
+<h2 *ngIf="!isinEditmode">ADD TODO</h2>
+<h2 *ngIf="isinEditmode">UPDATE TODO</h2>
 <div class="form-group">
     <label for="todoItem" class="text-primary"><strong>todo Item</strong></label>
     <input #todoItem type="text" class="form-control">
@@ -12,6 +13,11 @@
 </div>
 <div class="form-group">
     <button 
+    *ngIf="!isinEditmode"
     (click)="onAddtodo()"
     mat-raised-button  color="primary" class="w-100" >Add Todo</button>
+    <button 
+    *ngIf="isinEditmode"
+    (click)="onUpdatetodo()"
+    mat-raised-button  color="primary" class="w-100" >Update Todo</button>
 </div>

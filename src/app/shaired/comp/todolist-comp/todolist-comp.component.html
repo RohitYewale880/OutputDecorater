@@ -12,11 +12,15 @@
             <strong>{{todo.todoItem}}</strong>
         </div>
         <div>
-            <button mat-mini-fab color="primary" class="mr-3">
+            <button 
+            (click)="onEdit(todo)"
+            mat-mini-fab color="primary" class="mr-3">
                 <mat-icon>edit</mat-icon>
             </button>
 
-            <button mat-mini-fab color="warn">
+            <button 
+            (click)="onRemove(todo.todoId)"
+            mat-mini-fab color="warn">
                 <mat-icon>delete</mat-icon>
             </button>
         </div>

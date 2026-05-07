@@ -9,11 +9,12 @@ import { Itodo } from '../../modals/todo';
 export class TodolistCompComponent implements OnInit {
   @Input() gettodoarr! : Array<Itodo>;
   @Output() emitobjtoparent : EventEmitter<Itodo> = new EventEmitter<Itodo>()
+  @Output() emitRemoveId :EventEmitter<string> = new EventEmitter<string>()
+  @Output() emitEditobj : EventEmitter<Itodo> = new EventEmitter<Itodo>()
   constructor() { }
 
   ngOnInit(): void {
   }
-
   trackByfun(index:number , item : Itodo){
     return item.todoId;
   }
@@ -25,5 +26,12 @@ export class TodolistCompComponent implements OnInit {
     // let getindex = this.gettodoarr.findIndex((ele) => todo.todoId === ele.todoId)
     // this.gettodoarr[getindex].isComplete = event.checked;
     // console.log(this.gettodoarr)
+  }
+
+  onRemove(todoId:string){
+    this.emitRemoveId.emit(todoId)
+  }
+  onEdit(todo:Itodo){
+    this.emitEditobj.emit(todo);
   }
 }
