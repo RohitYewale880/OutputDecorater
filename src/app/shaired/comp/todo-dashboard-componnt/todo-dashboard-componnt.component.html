@@ -1,0 +1,18 @@
+<div class="container pt-5 pb-5">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-card class="example-card">
+                <mat-card-content>
+                    <app-todoform-comp (emitarray)="getObjtoadd($event)"></app-todoform-comp>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-6">
+            <mat-card class="example-card">
+                <mat-card-content>
+                    <app-todolist-comp [gettodoarr]="todoArray"></app-todolist-comp>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
