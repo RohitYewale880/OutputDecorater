@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Itodo } from '../../modals/todo';
 
 @Component({
@@ -8,6 +8,7 @@ import { Itodo } from '../../modals/todo';
 })
 export class TodolistCompComponent implements OnInit {
   @Input() gettodoarr! : Array<Itodo>;
+  @Output() emitobjtoparent : EventEmitter<Itodo> = new EventEmitter<Itodo>()
   constructor() { }
 
   ngOnInit(): void {
@@ -19,8 +20,10 @@ export class TodolistCompComponent implements OnInit {
 
   isCheckChange(event : any, todo : Itodo){
     todo.isComplete = event.checked // here event.checked return true/false
-    let getindex = this.gettodoarr.findIndex((ele) => todo.todoId === ele.todoId)
-    this.gettodoarr[getindex].isComplete = event.checked;
-    console.log(this.gettodoarr)
+
+    this.emitobjtoparent.emit(todo)
+    // let getindex = this.gettodoarr.findIndex((ele) => todo.todoId === ele.todoId)
+    // this.gettodoarr[getindex].isComplete = event.checked;
+    // console.log(this.gettodoarr)
   }
 }

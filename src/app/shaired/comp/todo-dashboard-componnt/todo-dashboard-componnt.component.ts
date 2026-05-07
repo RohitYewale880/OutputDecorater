@@ -21,4 +21,10 @@ export class TodoDashboardComponntComponent implements OnInit {
     this.todoArray.push(event);
   }
 
+  checkedObj(obj : Itodo){
+    let getindex = this.todoArray.findIndex((ele) => obj.todoId === ele.todoId)
+    this.todoArray[getindex].isComplete = obj.isComplete;
+    console.log(this.todoArray)
+  }
+
 }
