@@ -36,6 +36,7 @@ export class TodoDashboardComponntComponent implements OnInit {
   checkedObj(obj: Itodo) {
     let getindex = this.todoArray.findIndex((ele) => obj.todoId === ele.todoId)
     this.todoArray[getindex].isComplete = obj.isComplete;
+    localStorage.setItem('todoArray', JSON.stringify(this.todoArray))
     console.log(this.todoArray)
   }
 
