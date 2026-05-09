@@ -8,11 +8,7 @@ import { TodoDashboardComponntComponent } from './shaired/comp/todo-dashboard-co
 import { TodoformCompComponent } from './shaired/comp/todoform-comp/todoform-comp.component';
 import { TodolistCompComponent } from './shaired/comp/todolist-comp/todolist-comp.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MaterialModule } from './shaired/Modules/material.module';
 
 @NgModule({
   declarations: [
@@ -26,11 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatSnackBarModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

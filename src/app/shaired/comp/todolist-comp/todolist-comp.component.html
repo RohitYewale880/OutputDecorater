@@ -1,4 +1,4 @@
-<ul class="list-group">
+<ul class="list-group" *ngIf="gettodoarr.length > 0; else noData">
     <li *ngFor="let todo of gettodoarr; trackBy:trackByfun" 
     [ngClass]="{
         'completedTask' : todo.isComplete
@@ -26,3 +26,6 @@
         </div>
     </li>
 </ul>
+<ng-template #noData>
+    <p class="alert alert-info">No date is added Yet!!! & local storage is empty right now!!!</p>
+</ng-template>

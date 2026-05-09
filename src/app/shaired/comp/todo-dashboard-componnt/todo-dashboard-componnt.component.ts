@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Itodo } from '../../modals/todo';
-import { todoArr } from '../../consts/todo';
+
 import { snakbarservice } from '../../service/snakbar.service';
+import { todoArr } from '../../consts/todo';
 
 @Component({
   selector: 'app-todo-dashboard-componnt',
@@ -11,42 +12,51 @@ import { snakbarservice } from '../../service/snakbar.service';
 export class TodoDashboardComponntComponent implements OnInit {
 
   constructor(
-    private _snakbar : snakbarservice
+    private _snakbar: snakbarservice
   ) { }
 
-  todoArray! : Array<Itodo>;
-  editObj !: Itodo;
+  todoArray!: Array<Itodo>;
+
+  editObj!: Itodo;
 
   ngOnInit(): void {
-    this.todoArray = todoArr;
+    if (localStorage.getItem('todoArray')) {
+      this.todoArray = JSON.parse(localStorage.getItem('todoArray') || '[]');
+    }
+    else {
+      this.todoArray = [];
+    }
   }
 
-  getObjtoadd(event : Itodo){
+  getObjtoadd(event: Itodo) {
     this.todoArray.push(event);
+    localStorage.setItem('todoArray', JSON.stringify(this.todoArray))
   }
 
-  checkedObj(obj : Itodo){
+  checkedObj(obj: Itodo) {
     let getindex = this.todoArray.findIndex((ele) => obj.todoId === ele.todoId)
     this.todoArray[getindex].isComplete = obj.isComplete;
     console.log(this.todoArray)
   }
 
-  onRemoveidget(event : string){
+  onRemoveidget(event: string) {
     let getconfirm = confirm('Are you sure do you want to delete this todoItem!!!')
-    if(getconfirm){
+    if (getconfirm) {
       let getindex = this.todoArray.findIndex((ele) => ele.todoId === event)
       let val = this.todoArray.splice(getindex, 1);
       this._snakbar.OpenSnakbar(`The todoItem ${val[0].todoItem} is removed successfully!!!`)
     }
+    localStorage.setItem('todoArray', JSON.stringify(this.todoArray))
   }
 
-  onEditObjGet(event : Itodo){
+  onEditObjGet(event: Itodo) {
     this.editObj = event;
   }
 
-  getUpdatedObj(updated_obj : Itodo){
+  getUpdatedObj(updated_obj: Itodo) {
     let getindex = this.todoArray.findIndex((ele) => ele.todoId === updated_obj.todoId);
     this.todoArray[getindex] = updated_obj;
+    localStorage.setItem('todoArray', JSON.stringify(this.todoArray))
   }
 
 }

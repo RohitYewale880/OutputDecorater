@@ -17,10 +17,10 @@ export class TodoformCompComponent implements OnInit, OnChanges {
 
   @Output() emitarray: EventEmitter<Itodo> = new EventEmitter<Itodo>()
   @Input() formeditobj!: Itodo
-  @Output() emitupdateobj : EventEmitter<Itodo> = new EventEmitter<Itodo>()
+  @Output() emitupdateobj: EventEmitter<Itodo> = new EventEmitter<Itodo>()
   constructor(
     private _uuidservice: TodoserviceService,
-    private _snakbar : snakbarservice
+    private _snakbar: snakbarservice
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formeditobj']['currentValue']) {
@@ -35,19 +35,21 @@ export class TodoformCompComponent implements OnInit, OnChanges {
   }
 
   onAddtodo() {
-    let todoobj: Itodo = {
-      todoItem: this.todoItem.nativeElement.value,
-      isComplete: this.isComplete.nativeElement.value === 'true' ? true : false,
-      todoId: this._uuidservice.UUID().toString()
+    if (this.todoItem.nativeElement.value) {
+      let todoobj: Itodo = {
+        todoItem: this.todoItem.nativeElement.value,
+        isComplete: this.isComplete.nativeElement.value === 'true' ? true : false,
+        todoId: this._uuidservice.UUID().toString()
+      }
+      console.log(todoobj)
+
+      this.emitarray.emit(todoobj);
+
+      this.todoItem.nativeElement.value = ''
+      this.isComplete.nativeElement.value = true
+
+      this._snakbar.OpenSnakbar(`The TodoItem ${todoobj.todoItem} is Added successfully!!!`)
     }
-    console.log(todoobj)
-
-    this.emitarray.emit(todoobj);
-
-    this.todoItem.nativeElement.value = ''
-    this.isComplete.nativeElement.value = true
-
-    this._snakbar.OpenSnakbar(`The TodoItem ${todoobj.todoItem} is Added successfully!!!`)
   }
   onUpdatetodo() {
     let Updated_obj: Itodo = {
@@ -55,7 +57,7 @@ export class TodoformCompComponent implements OnInit, OnChanges {
       isComplete: this.isComplete.nativeElement.value === 'true' ? true : false,
       todoId: this.formeditobj.todoId
     }
-    
+
     this.emitupdateobj.emit(Updated_obj);
 
     this.todoItem.nativeElement.value = ''
